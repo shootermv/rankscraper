@@ -1,0 +1,7 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+    - name: Setup, Install & Build
+      before: yarn global add express
+      init: yarn install
