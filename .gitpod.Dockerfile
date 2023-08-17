@@ -1,10 +1,22 @@
-FROM gitpod/workspace-full:latest
+# Install custom tools, runtimes, etc.
+# For example "bastet", a command-line tetris clone:
+# RUN brew install bastet
+#
+# More information: https://www.gitpod.io/docs/config-docker/
+# Install Electron dependencies.
 
-USER root
+FROM gitpod/workspace-full
 
-RUN install-packages gnupg \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/googlechrome-linux-keyring.gpg \
-    && sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/googlechrome-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-    && install-packages google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-khmeros fonts-kacst fonts-freefont-ttf libxss1
-
-USER gitpod
+RUN sudo apt-get update \
+ && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+   libgtk2.0-0 \
+   libgtk-3-0 \
+   libnotify-dev \
+   libgconf-2-4 \
+   libnss3 \
+   libxss1 \
+   libasound2 \
+   libxtst6 \
+   xauth \
+   xvfb \
+ && sudo rm -rf /var/lib/apt/lists/*
