@@ -3,5 +3,4 @@ image:
 
 tasks:
     - name: Setup, Install & Build
-      before: yarn global add express
       init: yarn install
